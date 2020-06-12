@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Monochrome.fyi</title>
     <link href="css/viewer.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
     <script type="module" src="src/viewer/libs.js"></script>
     <script type="module" src="src/viewer/upload-icon.js"></script>
     <script type="module" src="src/viewer/keys.js"></script>
@@ -37,7 +37,7 @@
     <meta name="og:image" content="https://monochrome.fyi/github_social.png" />
     <meta name="og:url" content="https://monochrome.fyi" />
     <meta name="og:description" content="Preview monochrome icons in the browser!" />
-    <meta name="monetization" content="$ilp.uphold.com/p2WKq3nJHA8w">
+    <meta name="monetization" content="$ilp.uphold.com/p2WKq3nJHA8w" />
   </head>
 
   <body>
@@ -134,7 +134,11 @@
 
         <section class="icon__grid">
           <div class="icon__mono">
-            <div class="icon" data-src="demo/spec.svg" style="-webkit-mask-image:url(demo/spec.svg);mask-image:url(demo/spec.svg)"></div>
+            <div
+              class="icon"
+              data-src="demo/spec.svg"
+              style="-webkit-mask-image: url(demo/spec.svg); mask-image: url(demo/spec.svg);"
+            ></div>
           </div>
           <div class="icon__original">
             <img class="icon" alt="Preview of original icon" src="demo/spec.svg" />
@@ -164,10 +168,9 @@
         <hr />
         <aside class="about text">
           <p class="about__main">
-            Monochrome icons
-            allow web developers to specify a single color icon that will be filled in by the user-agent to match other
-            icons on the device. On Android, this lets developers customize notifications and other areas where their
-            icon appears with no color.
+            Monochrome icons allow web developers to specify a single color icon that will be filled in by the
+            user-agent to match other icons on the device. On Android, this lets developers customize notifications and
+            other areas where their icon appears with no color.
           </p>
           <p class="about__extra">
             Edit on

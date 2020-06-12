@@ -2,23 +2,21 @@
 
 # Monochrome.fyi
 
-_Preview
-monochrome icons
-in the browser!_
+_Preview monochrome icons in the browser!_
 
-![Demo usage](.github/monochrome-demo.gif)
+<!-- ![Demo usage](.github/monochrome-demo.gif) -->
 
 ---
 
-Monochrome icons
-allow web developers to specify a single color icon that will be filled in by the user-agent to match other
-icons on the device. On Android, this lets developers customize notifications and other areas where their
-icon appears with no color.
+Monochrome icons allow web developers to specify a single color icon that will
+be filled in by the user-agent to match other icons on the device. On Android,
+this lets developers customize notifications and other areas where their icon
+appears with no color.
 
-It's important to test monochrome icons to ensure your icon appears how you expect when it is displayed without any color.
-Upload a monochrome icon or drag
-and drop it into [Monochrome.fyi](https://monochrome.fyi), then preview how it will
-appear on different Android launchers.
+It's important to test monochrome icons to ensure your icon appears how you
+expect when it is displayed without any color. Upload a monochrome icon or drag
+and drop it into [Monochrome.fyi](https://monochrome.fyi), then preview how it
+will appear on different Android launchers.
 
 ## Developing
 

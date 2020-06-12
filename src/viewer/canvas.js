@@ -46,7 +46,7 @@ export function drawMonochromeIcon(canvas, icon) {
  */
 export function colorMonochromeIcon(canvas, fillStyle) {
   canvas.ctx.globalCompositeOperation = 'source-in';
-  canvas.ctx.fillStyle = fillStyle
+  canvas.ctx.fillStyle = fillStyle;
   canvas.ctx.fillRect(0, 0, canvas.size, canvas.size);
 }
 

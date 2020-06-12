@@ -12,7 +12,7 @@ async function updateDisplayedIcon(source) {
   /** @type {HTMLDivElement} */
   const monoDiv = document.querySelector('.icon');
   /** @type {HTMLImageElement} */
-  const originalImg = document.querySelector('.icon__original .icon')
+  const originalImg = document.querySelector('.icon__original .icon');
 
   // Revoke the old URL
   const oldUrl = monoDiv.dataset.src;
@@ -51,7 +51,8 @@ function updateSource(source) {
   const sourceLink = sourceDisplay.querySelector('.source__link');
 
   /** @type {HTMLImageElement | undefined | false} */
-  const preview = source && document.querySelector(`.demo__preview[src$="${source}"]`);
+  const preview =
+    source && document.querySelector(`.demo__preview[src$="${source}"]`);
   if (preview) {
     sourceDisplay.hidden = false;
     sourceLink.href = preview.dataset.source;
