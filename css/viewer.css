@@ -35,8 +35,8 @@ body {
 
   border: 1px solid transparent;
   border-radius: 4px;
-  color: black;
-  background: #ffd567;
+  color: white;
+  background: #0a214d;
   font-weight: 700;
   font-size: 0.875em;
   cursor: pointer;
@@ -46,12 +46,12 @@ body {
 input:focus + label.button--primary,
 input.focus + label.button--primary input:focus + label.button--secondary,
 input.focus + label.button--secondary {
-  background: #ffbf1d;
+  background: #081b40;
   box-shadow: 0 1px 2px #3c40434d, 0 1px 3px 1px #3c404326;
 }
 .button--primary:active,
 .button--secondary:active {
-  background: #ffd567;
+  background: #10347A;
   box-shadow: 0 1px 2px #3c40434d, 0 2px 6px 2px #3c404326;
 }
 

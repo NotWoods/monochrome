@@ -11,13 +11,13 @@
       "src": "favicon/favicon_512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any monochrome"
     },
     {
       "src": "favicon/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any monochrome"
     },
     {
       "src": "favicon/maskable_512.png",
@@ -30,12 +30,6 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "maskable"
-    },
-    {
-      "src": "favicon/monochrome_256.png",
-      "sizes": "256x256",
-      "type": "image/png",
-      "purpose": "monochrome"
     }
   ]
 }
