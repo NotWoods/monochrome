@@ -6,22 +6,11 @@ import { ignore } from './lib/ignore.js';
 const viewer = {
   input: [
     'src/viewer/polyfill.js',
-    'src/viewer/change-mask.js',
     'src/viewer/keys.js',
     'src/viewer/upload-icon.js',
   ],
   output: {
     file: 'src/viewer-bundle.js',
-    format: 'iife',
-  },
-  plugins: [multi()],
-};
-
-/** @type {import('rollup').RollupOptions} */
-const editor = {
-  input: ['src/viewer/change-mask.js', 'src/editor/main.js'],
-  output: {
-    file: 'src/editor-bundle.js',
     format: 'iife',
   },
   plugins: [multi()],
@@ -45,4 +34,4 @@ const libs = {
   ],
 };
 
-export default [viewer, editor, libs];
+export default [viewer, libs];

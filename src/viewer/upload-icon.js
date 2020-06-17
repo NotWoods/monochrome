@@ -9,13 +9,13 @@
 async function updateDisplayedIcon(source) {
   if (!source) return;
 
-  /** @type {HTMLDivElement} */
-  const monoDiv = document.querySelector('.icon');
+  /** @type {NodeListOf<HTMLElement>} */
+  const monoPreviews = document.querySelectorAll('.icon--monochrome');
   /** @type {HTMLImageElement} */
   const originalImg = document.querySelector('.icon__original .icon');
 
   // Revoke the old URL
-  const oldUrl = monoDiv.dataset.src;
+  const oldUrl = monoPreviews[0].dataset.src;
   if (oldUrl.startsWith('blob:')) {
     URL.revokeObjectURL(oldUrl);
   }
@@ -29,9 +29,12 @@ async function updateDisplayedIcon(source) {
     updateSource(undefined);
   }
 
-  monoDiv.dataset.src = source;
-  monoDiv.style.maskImage = `url(${source})`;
-  monoDiv.style.webkitMaskImage = `url(${source})`;
+  const urlToSource = `url(${source})`;
+  monoPreviews.forEach((el) => {
+    el.dataset.src = source;
+    el.style.maskImage = urlToSource;
+    el.style.webkitMaskImage = urlToSource;
+  });
   originalImg.src = source;
 }
 

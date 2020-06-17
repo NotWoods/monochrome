@@ -3,8 +3,10 @@ if (window.customElements) {
   import('/web_modules/dark-mode-toggle.js');
 }
 
-export const toggle = document.querySelector('dark-mode-toggle');
+const toggle = document.querySelector('dark-mode-toggle');
 const { body } = document;
+/** @type {HTMLImageElement} */
+const notificationPreview = document.querySelector('.preview--android_notification .preview__background')
 
 // Initialize the toggle based on `prefers-color-scheme`, defaulting to 'light'.
 toggle.mode = matchMedia('(prefers-color-scheme: dark)').matches
