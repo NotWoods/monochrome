@@ -1,3 +1,14 @@
+import {
+  ICON_CANVASES,
+  drawMonochromeIcon,
+  createImage,
+  colorMonochromeIcon,
+} from './canvas.js';
+import { toggle, fillStyle } from './libs.js';
+
+// @ts-ignore
+const isFirefox = typeof InstallTrigger !== 'undefined';
+
 /**
  * Changes the displayed icon in the center of the screen.
  *
@@ -9,16 +20,15 @@
 async function updateDisplayedIcon(source) {
   if (!source) return;
 
-  /** @type {NodeListOf<HTMLElement>} */
-  const monoPreviews = document.querySelectorAll('.icon--monochrome');
+  let toDisplay = source;
+  if (isFirefox && typeof source === 'string' && source.startsWith('demo/')) {
+    // Firefox can't display SVG in Canvas
+    toDisplay = source.replace('.svg', '.png');
+  }
+
+  const iconAsync = createImage(toDisplay);
   /** @type {HTMLImageElement} */
   const originalImg = document.querySelector('.icon__original .icon');
-
-  // Revoke the old URL
-  const oldUrl = monoPreviews[0].dataset.src;
-  if (oldUrl.startsWith('blob:')) {
-    URL.revokeObjectURL(oldUrl);
-  }
 
   // Update the URL bar
   if (typeof source === 'string') {
@@ -29,14 +39,22 @@ async function updateDisplayedIcon(source) {
     updateSource(undefined);
   }
 
-  const urlToSource = `url(${source})`;
-  monoPreviews.forEach((el) => {
-    el.dataset.src = source;
-    el.style.maskImage = urlToSource;
-    el.style.webkitMaskImage = urlToSource;
+  const icon = await iconAsync;
+  window.icon = icon;
+  ICON_CANVASES.forEach((canvas) => {
+    drawMonochromeIcon(canvas, icon);
+    colorMonochromeIcon(canvas, fillStyle(canvas));
   });
   originalImg.src = source;
 }
+
+updateDisplayedIcon('demo/spec.svg');
+toggle.addEventListener('colorschemechange', () => {
+  ICON_CANVASES.forEach((canvas) => {
+    drawMonochromeIcon(canvas, canvas.lastIcon);
+    colorMonochromeIcon(canvas, fillStyle(canvas))
+  });
+});
 
 /**
  * Changes the "Icon from" credits at the bottom of the app.

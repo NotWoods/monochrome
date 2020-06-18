@@ -5,17 +5,17 @@
     <title>Monochrome.fyi</title>
     <link href="css/viewer.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
-    <script type="module" src="src/viewer/libs.js"></script>
     <script type="module" src="src/viewer/upload-icon.js"></script>
     <script type="module" src="src/viewer/keys.js"></script>
     <script nomodule src="src/viewer-bundle.js" defer></script>
-    <script nomodule src="src/libs-bundle.js" defer></script>
     <link rel="preconnect" href="//getinsights.io" />
     <link rel="preload" href="toggle/sun.svg" as="image" />
     <link rel="preload" href="toggle/moon.svg" as="image" />
     <link rel="modulepreload" href="/web_modules/file-drop-element.js" />
     <link rel="modulepreload" href="/web_modules/dark-mode-toggle.js" />
     <link rel="modulepreload" href="/web_modules/insights-js/dist/esnext/index.js" />
+    <link rel="modulepreload" href="src/viewer/canvas.js" />
+    <link rel="modulepreload" href="src/viewer/libs.js" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon_16.png" />
@@ -134,14 +134,10 @@
 
         <section class="icon__grid">
           <div class="icon__mono">
-            <div
-              class="icon icon--monochrome"
-              data-src="demo/spec.svg"
-              style="-webkit-mask-image: url(demo/spec.svg); mask-image: url(demo/spec.svg);"
-            ></div>
+            <canvas class="icon" width="192" height="192" data-light="rgba(0, 0, 0, 0.7)" data-dark="rgba(255, 255, 255, 0.87)"></canvas>
           </div>
           <div class="icon__original">
-            <img class="icon" alt="Preview of original icon" src="demo/spec.svg" />
+            <img width="192" height="192" class="icon" alt="Preview of original icon" src="demo/spec.svg" />
           </div>
         </section>
 
@@ -170,12 +166,7 @@
 
           <div class="preview preview--android_notification">
             <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123">
-            <div
-              class="preview__icon icon icon--monochrome"
-              data-src="demo/spec.svg"
-              style="-webkit-mask-image: url(demo/spec.svg); mask-image: url(demo/spec.svg);"
-            ></div>
-          </div>
+            <canvas class="icon" width="21.6" height="21.6" data-light="#607D8B" data-dark="#607D8B"></canvas>
         </details>
 
         <hr />
@@ -200,15 +191,5 @@
         </aside>
       </main>
     </file-drop>
-
-    <svg height="0" width="0" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="squircle">
-          <path
-            d="M96 179.8c36.7 0 57.1 0 70.5-13.3 13.3-13.4 13.3-33.8 13.3-70.5s0-57.1-13.3-70.5C153 12.2 132.7 12.2 96 12.2s-57.1 0-70.5 13.3C12.2 39 12.2 59.3 12.2 96s0 57.1 13.3 70.5C39 179.8 59.3 179.8 96 179.8z"
-          />
-        </clipPath>
-      </defs>
-    </svg>
   </body>
 </html>

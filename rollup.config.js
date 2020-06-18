@@ -13,18 +13,8 @@ const viewer = {
     file: 'src/viewer-bundle.js',
     format: 'iife',
   },
-  plugins: [multi()],
-};
-
-/** @type {import('rollup').RollupOptions} */
-const libs = {
-  input: 'src/viewer/libs.js',
-  inlineDynamicImports: true,
-  output: {
-    file: 'src/libs-bundle.js',
-    format: 'iife',
-  },
   plugins: [
+    multi(),
     ignore({
       // Don't bother with custom elements on old browsers
       matches: (id) =>
@@ -34,4 +24,4 @@ const libs = {
   ],
 };
 
-export default [viewer, libs];
+export default viewer;
