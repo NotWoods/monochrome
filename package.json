@@ -11,7 +11,7 @@
     "minify:js:src": "find src -iname \"*.js\" -exec terser --compress --mangle --module -o {} -- {} \\;",
     "minify:js:modules": "find web_modules -iname \"*.js\" -exec terser --compress --mangle --module -o {} -- {} \\;",
     "minify:js:sw": "terser --compress --mangle --module -o sw.js -- sw.js",
-    "gzip": "gzip -k9nrf index.html viewer.css manifest.json && find . -maxdepth 2 -iname \"*.svg\" -exec gzip -k9nrf {} \\; && find src -iname \"*.js\" -exec gzip -k9nrf {} \\;"
+    "gzip": "gzip -k9nrf index.html css/viewer.css manifest.json && find . -maxdepth 2 -iname \"*.svg\" -exec gzip -k9nrf {} \\; && find src -iname \"*.js\" -exec gzip -k9nrf {} \\;"
   },
   "dependencies": {
     "dark-mode-toggle": "^0.6.0",

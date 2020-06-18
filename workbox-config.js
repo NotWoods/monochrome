@@ -8,6 +8,7 @@ module.exports = {
     'web_modules/*.js',
     'demo/*.{png,svg}',
     'favicon/favicon_*.png',
+    'previews/*.svg',
     'toggle/*.svg',
   ],
   globIgnores: ['**/node_modules/**', '**/sw.js', 'src/*/bundle.js'],
