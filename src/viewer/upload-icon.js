@@ -52,7 +52,7 @@ updateDisplayedIcon('demo/spec.svg');
 toggle.addEventListener('colorschemechange', () => {
   ICON_CANVASES.forEach((canvas) => {
     drawMonochromeIcon(canvas, canvas.lastIcon);
-    colorMonochromeIcon(canvas, fillStyle(canvas))
+    colorMonochromeIcon(canvas, fillStyle(canvas));
   });
 });
 

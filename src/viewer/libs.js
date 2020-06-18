@@ -6,7 +6,9 @@ if (window.customElements) {
 export const toggle = document.querySelector('dark-mode-toggle');
 const { body } = document;
 /** @type {HTMLImageElement} */
-const notificationImage = document.querySelector('.preview--android_notification .preview__background')
+const notificationImage = document.querySelector(
+  '.preview--android_notification .preview__background'
+);
 
 // Initialize the toggle based on `prefers-color-scheme`, defaulting to 'light'.
 toggle.mode = matchMedia('(prefers-color-scheme: dark)').matches
@@ -21,7 +23,7 @@ toggle.mode === 'dark'
 // and toggle the `dark` class accordingly.
 toggle.addEventListener('colorschemechange', () => {
   body.classList.toggle('dark', toggle.mode === 'dark');
-  notificationImage.src = `previews/android_notification_${toggle.mode}.svg`
+  notificationImage.src = `previews/android_notification_${toggle.mode}.svg`;
 });
 
 /**

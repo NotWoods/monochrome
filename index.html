@@ -134,7 +134,13 @@
 
         <section class="icon__grid">
           <div class="icon__mono">
-            <canvas class="icon" width="192" height="192" data-light="rgba(0, 0, 0, 0.7)" data-dark="rgba(255, 255, 255, 0.87)"></canvas>
+            <canvas
+              class="icon"
+              width="192"
+              height="192"
+              data-light="rgba(0, 0, 0, 0.7)"
+              data-dark="rgba(255, 255, 255, 0.87)"
+            ></canvas>
           </div>
           <div class="icon__original">
             <img width="192" height="192" class="icon" alt="Preview of original icon" src="demo/spec.svg" />
@@ -165,16 +171,18 @@
           <summary><h3>Previews</h3></summary>
 
           <div class="preview preview--android_notification">
-            <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123">
+            <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123" />
             <canvas class="icon" width="21.6" height="21.6" data-light="#607D8B" data-dark="#607D8B"></canvas>
+          </div>
         </details>
 
         <hr />
         <aside class="about text">
           <p class="about__main">
-            Monochrome icons allow web developers to specify a single color icon that will be filled in by the
-            user-agent to match other icons on the device. On Android, this lets developers customize notifications and
-            other areas where their icon appears with no color.
+            <a class="about__link" href="https://www.w3.org/TR/appmanifest/#purpose-member">Monochrome icons</a> allow
+            web developers to specify a single color icon that will be filled in by the user-agent to match other icons
+            on the device. On Android, this lets developers customize notifications and other areas where their icon
+            appears with no color.
           </p>
           <p class="about__extra">
             Edit on
