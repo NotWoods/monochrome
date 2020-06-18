@@ -16,7 +16,7 @@ appears with no color.
 It's important to test monochrome icons to ensure your icon appears how you
 expect when it is displayed without any color. Upload a monochrome icon or drag
 and drop it into [Monochrome.fyi](https://monochrome.fyi), then preview how it
-will appear on different Android launchers.
+will appear on different devices.
 
 ## Developing
 
