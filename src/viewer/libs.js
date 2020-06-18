@@ -36,7 +36,7 @@ export function fillStyle(canvas) {
 }
 
 import('/web_modules/insights-js/dist/esnext/index.js').then((insights) => {
-  insights.init('qspST8ZECeI0JEFM');
+  insights.init('y6yWbWxkwgJTUTO8');
   insights.trackPages();
 
   // Track number of clicks on the "Icon from..." link
