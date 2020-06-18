@@ -210,6 +210,11 @@ dark-mode-toggle {
   --dark-mode-toggle-icon-filter: invert(100%);
 }
 
+.icon__mono .icon {
+  width: 192px;
+  height: 192px;
+}
+
 .preview {
   display: inline-block;
   position: relative;
@@ -229,6 +234,8 @@ dark-mode-toggle {
 .preview--android_notification .icon {
   top: 18.9px;
   left: 17.3px;
+  width: 21.6px;
+  height: 21.6px;
 }
 
 @media (max-height: 400px) {
