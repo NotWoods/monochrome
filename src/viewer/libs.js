@@ -4,27 +4,43 @@ if (window.customElements) {
 }
 
 export const toggle = document.querySelector('dark-mode-toggle');
-const { body } = document;
+const ad = document.querySelector('[data-ea-publisher]');
 /** @type {HTMLImageElement} */
 const notificationImage = document.querySelector(
   '.preview--android_notification .preview__background'
 );
+
+/**
+ * Set or remove the `dark` class on body and ads.
+ * @param {boolean} darkMode
+ */
+function updateDarkModeClasses(darkMode) {
+  document.body.classList.toggle('dark', darkMode);
+  ad.classList.toggle('dark', darkMode)
+}
 
 // Initialize the toggle based on `prefers-color-scheme`, defaulting to 'light'.
 toggle.mode = matchMedia('(prefers-color-scheme: dark)').matches
   ? 'dark'
   : 'light';
 // Set or remove the `dark` class the first time.
-toggle.mode === 'dark'
-  ? body.classList.add('dark')
-  : body.classList.remove('dark');
+updateDarkModeClasses(toggle.mode === 'dark')
 
 // Listen for toggle changes (which includes `prefers-color-scheme` changes)
 // and toggle the `dark` class accordingly.
 toggle.addEventListener('colorschemechange', () => {
-  body.classList.toggle('dark', toggle.mode === 'dark');
+  updateDarkModeClasses(toggle.mode === 'dark')
   notificationImage.src = `previews/android_notification_${toggle.mode}.svg`;
 });
+
+if (document.monetization) {
+  document.monetization.addEventListener('monetizationstart', () => {
+    if (document.monetization.state === 'started') {
+      console.log('Payment started, hiding ads');
+      ad.hidden = true;
+    }
+  });
+}
 
 /**
  * @param {object} canvas
