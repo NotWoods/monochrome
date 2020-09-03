@@ -5,7 +5,7 @@ import {
   drawMonochromeIcon,
   createImage,
   colorMonochromeIcon,
-} from './canvas.js';
+} from './canvas2.js';
 import { toggle, fillStyle } from './libs.js';
 
 // @ts-ignore
