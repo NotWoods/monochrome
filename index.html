@@ -16,6 +16,7 @@
     <link rel="modulepreload" href="/web_modules/dark-mode-toggle.js" />
     <link rel="modulepreload" href="/web_modules/insights-js/dist/esnext/index.js" />
     <link rel="modulepreload" href="src/viewer/canvas.js" />
+    <link rel="modulepreload" href="src/viewer/layer.js" />
     <link rel="modulepreload" href="src/viewer/libs.js" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -61,6 +62,7 @@
                 height="56"
                 class="demo__preview"
                 src="demo/spec.svg"
+                data-png="demo/spec.png"
                 alt="W3C example"
                 data-source="https://www.w3.org/TR/appmanifest/#examples-of-masks"
               />
@@ -85,6 +87,7 @@
                 height="56"
                 class="demo__preview"
                 src="demo/insightful-energy.svg"
+                data-png="demo/insightful-energy.png"
                 alt="Insightful Energy"
                 data-source="https://notwoods.github.io/insightful-energy/"
               />
@@ -97,6 +100,7 @@
                 height="56"
                 class="demo__preview"
                 src="demo/big-island-buses.svg"
+                data-png="demo/big-island-buses.png"
                 alt="Big Island Buses"
                 data-source="https://notwoods.github.io/big-island-buses/"
               />
@@ -109,6 +113,7 @@
                 height="56"
                 class="demo__preview"
                 src="demo/proxx.svg"
+                data-png="demo/proxx.png"
                 alt="PROXX"
                 data-source="https://proxx.app"
               />
@@ -121,6 +126,7 @@
                 height="56"
                 class="demo__preview"
                 src="demo/svgomg.svg"
+                data-png="demo/svgomg.png"
                 alt="SVGOMG"
                 data-source="https://jakearchibald.github.io/svgomg/"
               />
@@ -139,8 +145,8 @@
               class="icon"
               width="192"
               height="192"
-              data-light="rgba(0, 0, 0, 0.7)"
-              data-dark="rgba(255, 255, 255, 0.87)"
+              data-light="#4b4b4b"
+              data-dark="#e4e4e4"
             ></canvas>
           </div>
           <div class="icon__original">

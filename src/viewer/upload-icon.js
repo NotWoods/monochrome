@@ -1,15 +1,36 @@
 // @ts-check
 
-import {
-  ICON_CANVASES,
-  drawMonochromeIcon,
-  createImage,
-  colorMonochromeIcon,
-} from './canvas2.js';
-import { toggle, fillStyle } from './libs.js';
+import { drawLayer, scaleCanvas } from './canvas.js';
+import { layerFromSource } from './layer.js';
+import { toggle } from './libs.js';
 
 // @ts-ignore
-const isFirefox = typeof InstallTrigger !== 'undefined';
+const IS_FIREFOX = typeof InstallTrigger !== 'undefined';
+const DPR = window.devicePixelRatio || 1;
+
+const ICON_CANVASES = Array.from(
+  document.querySelectorAll('canvas')
+).map((canvas) => scaleCanvas(canvas, canvas.width, DPR));
+
+// @ts-ignore
+window.ICON_CANVASES = ICON_CANVASES;
+
+/** @type {import('./types').Layer | undefined} */
+let currentLayer;
+
+/**
+ * Sanitize a demo source on Firefox,
+ * which has bugs loading relative path SVGs into the canvas.
+ *
+ * @param {string} source Source URL of the image.
+ */
+function sanitizeDemoSource(source) {
+  if (IS_FIREFOX && source.startsWith('demo/')) {
+    return source.replace('.svg', '.png');
+  } else {
+    return source;
+  }
+}
 
 /**
  * Changes the displayed icon in the center of the screen.
@@ -22,41 +43,54 @@ const isFirefox = typeof InstallTrigger !== 'undefined';
 async function updateDisplayedIcon(source) {
   if (!source) return;
 
-  let toDisplay = source;
-  if (isFirefox && typeof source === 'string' && source.startsWith('demo/')) {
-    // Firefox can't display SVG in Canvas
-    toDisplay = source.replace('.svg', '.png');
-  }
-
-  const iconAsync = createImage(toDisplay);
+  const layerAsync = layerFromSource(source);
   /** @type {HTMLImageElement} */
   const originalImg = document.querySelector('.icon__original .icon');
+
+  const oldUrl = originalImg.src;
+  if (oldUrl.startsWith('blob:')) {
+    URL.revokeObjectURL(oldUrl);
+  }
 
   // Update the URL bar
   if (typeof source === 'string') {
     history.replaceState(undefined, '', `?demo=${source}`);
-    updateSource(source);
   } else {
+    // Create a URL corresponding to the file.
+    source = URL.createObjectURL(source);
     history.replaceState(undefined, '', '.');
-    updateSource(undefined);
   }
+  updateSource(source);
 
-  const icon = await iconAsync;
+  currentLayer = await layerAsync;
   ICON_CANVASES.forEach((canvas) => {
-    drawMonochromeIcon(canvas, icon);
-    colorMonochromeIcon(canvas, fillStyle(canvas));
+    drawLayer(currentLayer, canvas, toggle.mode);
   });
-  // @ts-expect-error TODO fix error
   originalImg.src = source;
 }
 
-updateDisplayedIcon('demo/spec.svg');
 toggle.addEventListener('colorschemechange', () => {
-  ICON_CANVASES.forEach((canvas) => {
-    drawMonochromeIcon(canvas, canvas.lastIcon);
-    colorMonochromeIcon(canvas, fillStyle(canvas));
-  });
+  if (currentLayer) {
+    ICON_CANVASES.forEach((canvas) => {
+      drawLayer(currentLayer, canvas, toggle.mode);
+    });
+  }
 });
+
+function cachePreviewMap() {
+  /** @type {NodeListOf<HTMLImageElement>} */
+  const previews = document.querySelectorAll('.demo__preview');
+  /** @type {Map<string, HTMLImageElement>} */
+  const map = new Map();
+
+  for (const preview of previews) {
+    map.set(sanitizeDemoSource(preview.src), preview);
+  }
+
+  return map;
+}
+
+const previewMap = cachePreviewMap();
 
 /**
  * Changes the "Icon from" credits at the bottom of the app.
@@ -75,7 +109,10 @@ function updateSource(source) {
 
   /** @type {HTMLImageElement | null} */
   const preview =
-    source && document.querySelector(`.demo__preview[src$="${source}"]`);
+    source &&
+    document.querySelector(
+      `.demo__preview[src$="${source}"],.demo__preview[data-png="${source}"]`
+    );
   if (preview) {
     sourceDisplay.hidden = false;
     sourceLink.href = preview.dataset.source;
@@ -109,7 +146,7 @@ fileInput.addEventListener('blur', () => fileInput.classList.remove('focus'), {
 
 // If there's a URL present in the "?demo" query parameter, use it as the icon URL.
 const demoUrl = new URL(location.href).searchParams.get('demo');
-updateDisplayedIcon(demoUrl);
+updateDisplayedIcon(sanitizeDemoSource(demoUrl || 'demo/spec.svg'));
 
 /** @type {HTMLUListElement} */
 const demoLinks = document.querySelector('.demo__list');
@@ -120,7 +157,7 @@ demoLinks.addEventListener('click', (evt) => {
   if (link != null) {
     evt.preventDefault();
     const demoUrl = new URL(link.href).searchParams.get('demo');
-    updateDisplayedIcon(demoUrl);
+    updateDisplayedIcon(sanitizeDemoSource(demoUrl));
   }
 });
 

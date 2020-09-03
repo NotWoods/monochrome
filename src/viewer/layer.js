@@ -24,11 +24,11 @@ async function createImage(source) {
 /**
  * Create a layer from a source file.
  * @param {File | string} source
- * @returns {Promise<import("./layer.js").Layer>}
+ * @returns {Promise<import("./types").Layer>}
  */
 export async function layerFromSource(source) {
   const img = await createImage(source);
-  const layer = createLayer('#ffffff', img);
+  const layer = createLayer(img);
   if (typeof source === 'string') {
     layer.name = source;
   } else {
@@ -39,19 +39,17 @@ export async function layerFromSource(source) {
 
 /**
  * Create a new image or color canvas.
- * @param {string} fill
- * @param {import("./layer.js").CanvasImageSourceNum} [src]
- * @returns {import("./layer.js").Layer}
+ * @param {import("./types").CanvasImageSourceNum} [src]
+ * @returns {import("./types").Layer}
  */
-export function createLayer(fill, src) {
+export function createLayer(src) {
   return {
     src,
     name: 'Layer',
-    fill,
     padding: 0,
     x: 0,
     y: 0,
-    alpha: src ? 0 : 100,
+    alpha: 100,
     locked: false,
     fit: 'contain',
   };

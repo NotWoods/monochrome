@@ -3,7 +3,9 @@ if (window.customElements) {
   import('/web_modules/dark-mode-toggle.js');
 }
 
+/** @type {import('./types').DarkModeToggleElement} */
 export const toggle = document.querySelector('dark-mode-toggle');
+/** @type {HTMLElement} */
 const ad = document.querySelector('[data-ea-publisher]');
 /** @type {HTMLImageElement} */
 const notificationImage = document.querySelector(
@@ -40,15 +42,6 @@ if (document.monetization) {
       ad.hidden = true;
     }
   });
-}
-
-/**
- * @param {object} canvas
- * @param {{light: string, dark: string}} canvas.fill
- * @returns {string}
- */
-export function fillStyle(canvas) {
-  return canvas.fill[toggle.mode || 'light'];
 }
 
 import('/web_modules/insights-js/dist/esnext/index.js').then((insights) => {

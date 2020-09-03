@@ -6,6 +6,8 @@ type CanvasImageSourceNum =
   | ImageBitmap
   | OffscreenCanvas;
 
+export type ColorScheme = 'light' | 'dark';
+
 /**
  * Data class representing a layer that can be drawn onto the canvas.
  */
@@ -18,10 +20,6 @@ export interface Layer {
    * Name of the layer. Defaults to filename.
    */
   name: string;
-  /**
-   * CSS color used to tint the layer.
-   */
-  fill: string;
   /**
    * Value from [0-100] representing the layer opacity.
    */
@@ -42,18 +40,37 @@ export interface Layer {
 }
 
 /**
- * Create a list of layers from a list of files
- * @param {Iterable<File>} files
- * @returns {Promise<import("./layer.js").Layer[]>}
+ * Wrapper around canvas element with reference to rendering context and size.
  */
-export function layersFromFiles(files: Iterable<File>): Promise<Layer[]>;
+export interface CanvasContainer {
+  /**
+   * The referenced canvas element.
+   */
+  canvas: HTMLCanvasElement;
+  /**
+   * Rendering context for `canvas`.
+   */
+  ctx: CanvasRenderingContext2D;
+  /**
+   * Width and height of the square `canvas`.
+   */
+  size: number;
+  /**
+   * Fill color dependent on color scheme.
+   */
+  fill: Record<ColorScheme, CanvasFillStrokeStyles['fillStyle']>;
+}
 
-/**
- * Create a new image or color canvas.
- * @param {string} fill
- * @param {CanvasImageSourceNum} [src]
- * @returns {import("./layer.js").Layer}
- */
-export function createLayer(fill: string, src?: CanvasImageSourceNum): Layer;
+export interface DarkModeToggleElement extends HTMLElement {
+  mode: ColorScheme;
+}
 
-export function backgroundLayer(): Layer;
+declare global {
+  interface Monetization extends EventTarget {
+    readonly state: 'pending' | 'started'
+  }
+
+  interface Document {
+    monetization: Monetization
+  }
+}
