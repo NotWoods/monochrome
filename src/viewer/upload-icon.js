@@ -1,3 +1,5 @@
+// @ts-check
+
 import {
   ICON_CANVASES,
   drawMonochromeIcon,
@@ -12,7 +14,7 @@ const isFirefox = typeof InstallTrigger !== 'undefined';
 /**
  * Changes the displayed icon in the center of the screen.
  *
- * @param {Blob | string | undefined} source URL or File for the icon.
+ * @param {File | string | undefined} source URL or File for the icon.
  * If a File/Blob, an object URL is created and displayed.
  * If a string, the string is used as a URL directly.
  * If undefined (or falsy), nothing happens.
@@ -40,11 +42,11 @@ async function updateDisplayedIcon(source) {
   }
 
   const icon = await iconAsync;
-  window.icon = icon;
   ICON_CANVASES.forEach((canvas) => {
     drawMonochromeIcon(canvas, icon);
     colorMonochromeIcon(canvas, fillStyle(canvas));
   });
+  // @ts-expect-error TODO fix error
   originalImg.src = source;
 }
 
@@ -71,7 +73,7 @@ function updateSource(source) {
   /** @type {HTMLAnchorElement} */
   const sourceLink = sourceDisplay.querySelector('.source__link');
 
-  /** @type {HTMLImageElement | undefined | false} */
+  /** @type {HTMLImageElement | null} */
   const preview =
     source && document.querySelector(`.demo__preview[src$="${source}"]`);
   if (preview) {
@@ -113,6 +115,7 @@ updateDisplayedIcon(demoUrl);
 const demoLinks = document.querySelector('.demo__list');
 demoLinks.addEventListener('click', (evt) => {
   const target = /** @type {HTMLElement} */ (evt.target);
+  /** @type {HTMLAnchorElement} */
   const link = target.closest('.demo__link');
   if (link != null) {
     evt.preventDefault();
