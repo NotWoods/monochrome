@@ -63,10 +63,10 @@ body {
   white-space: nowrap
 }
 .navbar__link:hover {
-  background: rgba(255, 191, 29, 0.3);
+  background: rgba(8, 27, 64, 0.2);
 }
 .navbar__link:focus {
-  background: rgba(255, 191, 29, 0.4);
+  background: rgba(8, 27, 64, 0.3);
 }
 .navbar__link--active {
   color: inherit;
