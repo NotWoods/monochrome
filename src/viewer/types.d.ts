@@ -6,8 +6,6 @@ type CanvasImageSourceNum =
   | ImageBitmap
   | OffscreenCanvas;
 
-export type ColorScheme = 'light' | 'dark';
-
 /**
  * Data class representing a layer that can be drawn onto the canvas.
  */
@@ -59,18 +57,4 @@ export interface CanvasContainer {
    * Fill color dependent on color scheme.
    */
   fill: Record<ColorScheme, CanvasFillStrokeStyles['fillStyle']>;
-}
-
-export interface DarkModeToggleElement extends HTMLElement {
-  mode: ColorScheme;
-}
-
-declare global {
-  interface Monetization extends EventTarget {
-    readonly state: 'pending' | 'started'
-  }
-
-  interface Document {
-    monetization: Monetization
-  }
 }

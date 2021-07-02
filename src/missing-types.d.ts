@@ -1,7 +1,7 @@
-interface Navigator {
-  share(data: { url?: string; text?: string; title?: string }): Promise<void>;
-}
+import { FileDropEvent } from "file-drop-element";
 
-interface CSSStyleDeclaration {
-  webkitClipPath?: string;
+declare global {
+  interface HTMLElementEventMap {
+    'filedrop': FileDropEvent
+  }
 }

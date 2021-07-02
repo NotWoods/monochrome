@@ -2,10 +2,12 @@
   "name": "monochrome",
   "private": true,
   "scripts": {
-    "format": "prettier src/*/*.js lib/*.js tests/*/*.ts css/*.css *.{html,md,json} {workbox-,rollup.}config.js --write",
+    "format": "prettier 'src/*/*.js' 'lib/*.mjs' 'css/*.css' '*.{html,md,json}' '*.{mjs,cjs}' '*.cjs' --write",
+    "postformat": "eslint 'src/**/*.js' 'lib/**/*.mjs' '*.{mjs,cjs}' --fix",
+    "test": "tsc",
     "build": "npm run prepare -- --optimize && npm run minify:js:src && npm run minify:js:modules && npm run minify:css && npm run sw && npm run minify:js:sw",
     "prepare": "snowpack",
-    "sw": "workbox generateSW workbox-config.js",
+    "sw": "workbox generateSW workbox-config.cjs",
     "nomodule": "rollup -c",
     "minify:css": "csso css/viewer.css -o css/viewer.css",
     "minify:js:src": "find src -iname \"*.js\" -exec terser --compress --mangle --module -o {} -- {} \\;",
@@ -13,18 +15,22 @@
     "minify:js:sw": "terser --compress --mangle --module -o sw.js -- sw.js"
   },
   "dependencies": {
-    "dark-mode-toggle": "^0.6.0",
-    "file-drop-element": "^0.2.0",
+    "dark-mode-toggle": "^0.8.0",
+    "file-drop-element": "^1.0.1",
     "insights-js": "^1.2.10"
   },
   "devDependencies": {
-    "@rollup/plugin-multi-entry": "^3.0.1",
+    "@rollup/plugin-multi-entry": "^4.0.0",
     "csso-cli": "^3.0.0",
-    "prettier": "^2.0.5",
-    "rollup": "^2.38.5",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "~2.3.2",
+    "rollup": "^2.52.6",
     "snowpack": "^1.7.1",
-    "terser": "^5.5.1",
-    "workbox-cli": "^6.1.0"
+    "terser": "^5.7.1",
+    "types-wm": "^1.1.0",
+    "typescript": "^4.3.5",
+    "workbox-cli": "^6.1.5"
   },
   "prettier": {
     "singleQuote": true,

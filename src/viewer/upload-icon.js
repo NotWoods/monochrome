@@ -8,9 +8,9 @@ import { toggle } from './libs.js';
 const IS_FIREFOX = typeof InstallTrigger !== 'undefined';
 const DPR = window.devicePixelRatio || 1;
 
-const ICON_CANVASES = Array.from(
-  document.querySelectorAll('canvas')
-).map((canvas) => scaleCanvas(canvas, canvas.width, DPR));
+const ICON_CANVASES = Array.from(document.querySelectorAll('canvas')).map(
+  (canvas) => scaleCanvas(canvas, canvas.width, DPR)
+);
 
 // @ts-ignore
 window.ICON_CANVASES = ICON_CANVASES;
@@ -76,21 +76,6 @@ toggle.addEventListener('colorschemechange', () => {
     });
   }
 });
-
-function cachePreviewMap() {
-  /** @type {NodeListOf<HTMLImageElement>} */
-  const previews = document.querySelectorAll('.demo__preview');
-  /** @type {Map<string, HTMLImageElement>} */
-  const map = new Map();
-
-  for (const preview of previews) {
-    map.set(sanitizeDemoSource(preview.src), preview);
-  }
-
-  return map;
-}
-
-const previewMap = cachePreviewMap();
 
 /**
  * Changes the "Icon from" credits at the bottom of the app.
@@ -166,11 +151,12 @@ const container = document.querySelector('.icon__grid');
 document.querySelector('.controls').addEventListener('change', (evt) => {
   const checkbox = /** @type {HTMLInputElement} */ (evt.target);
   switch (checkbox.name) {
-    case 'shrink':
+    case 'shrink': {
       // Shrink the icon to 1/4 size
       const size = checkbox.checked ? '0.25' : '1';
       container.style.transform = `scale(${size})`;
       break;
+    }
     case 'original':
       // Show ghost image behind icon
       container.classList.toggle('icon--original', checkbox.checked);

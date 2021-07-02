@@ -1,9 +1,9 @@
 import multi from '@rollup/plugin-multi-entry';
-import { absolutePath } from './lib/absolute-path.js';
-import { ignore } from './lib/ignore.js';
+import { defineConfig } from 'rollup';
+import { absolutePath } from './lib/absolute-path.mjs';
+import { ignore } from './lib/ignore.mjs';
 
-/** @type {import('rollup').RollupOptions} */
-const viewer = {
+export default defineConfig({
   input: [
     'src/viewer/polyfill.js',
     'src/viewer/keys.js',
@@ -22,6 +22,4 @@ const viewer = {
     }),
     absolutePath(),
   ],
-};
-
-export default viewer;
+});
