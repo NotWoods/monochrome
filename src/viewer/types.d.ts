@@ -58,3 +58,9 @@ export interface CanvasContainer {
    */
   fill: Record<ColorScheme, CanvasFillStrokeStyles['fillStyle']>;
 }
+
+declare global {
+  interface HTMLElementEventMap {
+    filedrop: import('file-drop-element').FileDropEvent;
+  }
+}

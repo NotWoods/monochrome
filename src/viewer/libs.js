@@ -50,19 +50,3 @@ if (document.monetization) {
     onMonetizationStart
   );
 }
-
-import('/web_modules/insights-js/dist/esnext/index.js').then((insights) => {
-  insights.init('y6yWbWxkwgJTUTO8');
-  insights.trackPages();
-
-  // Track number of clicks on the "Icon from..." link
-  const source = document.querySelector('.source__link');
-  if (!source) return;
-  source.addEventListener('click', (evt) => {
-    const link = /** @type {HTMLAnchorElement} */ (evt.currentTarget);
-    insights.track({
-      id: 'view-item',
-      parameters: { id: link.href },
-    });
-  });
-});
