@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fafafa",
-  "theme_color": "#FFD567",
+  "theme_color": "#0a214d",
   "description": "Preview monochrome icons in the browser.",
   "icons": [
     {
