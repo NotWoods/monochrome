@@ -11,6 +11,7 @@ body {
   color: var(--text-color);
   background: #fafafa;
   text-align: center;
+  accent-color: #0a214d;
 }
 .dark {
   --text-color: white;
