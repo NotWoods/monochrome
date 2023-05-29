@@ -14,7 +14,7 @@ const config = {
     sourceType: 'module',
     impliedStrict: true,
   },
-  ignorePatterns: ['**/*.d.ts', '**/*-bundle.js', 'web_modules/**/*'],
+  ignorePatterns: ['**/*.d.ts', '**/*-bundle.js'],
   rules: {
     'prefer-arrow-callback': [
       'error',

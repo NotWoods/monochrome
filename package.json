@@ -1,35 +1,33 @@
 {
   "name": "monochrome",
   "private": true,
+  "type": "module",
   "scripts": {
-    "format": "prettier \"src/*/*.js\" \"lib/*.mjs\" \"css/*.css\" \"*.{html,md,json}\" \"*.{mjs,cjs}\" \"*.cjs\" --write",
-    "postformat": "eslint \"src/**/*.js\" \"lib/**/*.mjs\" \"*.{mjs,cjs}\" --fix",
-    "test": "tsc",
-    "build": "npm run prepare -- --optimize && npm run minify:js:src && npm run minify:js:modules && npm run minify:css && npm run sw && npm run minify:js:sw",
-    "prepare": "snowpack",
-    "sw": "workbox generateSW workbox-config.cjs",
-    "nomodule": "rollup -c",
-    "minify:css": "csso css/viewer.css -o css/viewer.css",
-    "minify:js:src": "find src -iname \"*.js\" -exec terser --compress --mangle --module -o {} -- {} \\;",
-    "minify:js:modules": "find web_modules -iname \"*.js\" -exec terser --compress --mangle --module -o {} -- {} \\;",
-    "minify:js:sw": "terser --compress --mangle --module -o sw.js -- sw.js"
+    "lint": "prettier . --ignore-path .gitignore --check && eslint . --ignore-path .gitignore",
+    "format": "prettier . --ignore-path .gitignore --write && eslint . --ignore-path .gitignore --fix",
+    "test": "npm run check && vitest",
+    "check": "tsc --noEmit",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "dark-mode-toggle": "^0.8.0",
     "file-drop-element": "^1.0.1"
   },
   "devDependencies": {
-    "@rollup/plugin-multi-entry": "^4.1.0",
-    "csso-cli": "^3.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "prettier": "~2.4.0",
-    "rollup": "^2.56.3",
-    "snowpack": "^1.7.1",
-    "terser": "^5.7.2",
+    "@typescript/lib-dom": "npm:@types/web@^0.0.99",
+    "@vitejs/plugin-legacy": "^4.0.2",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "jsdom": "^22.1.0",
+    "prettier": "~2.8.8",
     "types-wm": "^1.1.0",
-    "typescript": "^4.4.3",
-    "workbox-cli": "^6.3.0"
+    "typescript": "^5.0.2",
+    "vite": "^4.2.0",
+    "vite-plugin-pwa": "^0.15.1",
+    "vite-plugin-webfont-dl": "^3.6.1",
+    "vitest": "^0.31.1"
   },
   "prettier": {
     "singleQuote": true,

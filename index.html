@@ -7,12 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
     <script type="module" src="src/viewer/upload-icon.js"></script>
     <script type="module" src="src/viewer/keys.js"></script>
-    <script nomodule src="src/viewer-bundle.js" defer></script>
     <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
     <link rel="preload" href="toggle/sun.svg" as="image" />
     <link rel="preload" href="toggle/moon.svg" as="image" />
-    <link rel="modulepreload" href="/web_modules/file-drop-element.js" />
-    <link rel="modulepreload" href="/web_modules/dark-mode-toggle.js" />
     <link rel="modulepreload" href="src/viewer/canvas.js" />
     <link rel="modulepreload" href="src/viewer/layer.js" />
     <link rel="modulepreload" href="src/viewer/libs.js" />
@@ -38,7 +35,7 @@
     <meta name="og:url" content="https://monochrome.fyi" />
     <meta name="og:description" content="Preview monochrome icons in the browser!" />
     <meta name="monetization" content="$ilp.uphold.com/p2WKq3nJHA8w" />
-    <script src="https://beaming-successful.monochrome.fyi/script.js" data-site="NJIHCIQU" data-spa="hash" defer></script>
+    <script src="https://cdn.usefathom.com/script.js" data-site="NJIHCIQU" data-spa="hash" defer></script>
   </head>
 
   <body>
@@ -161,8 +158,14 @@
           </li>
         </ul>
 
-        <input type="file" accept="image/*" class="hidden-input" id="icon_file" name="icon_file" />
-        <label for="icon_file" class="icon__file-input button--primary"> Open icon file </label>
+        <div class="button__row">
+          <input type="file" accept="image/*" class="hidden-offscreen" id="icon_file" name="icon_file" />
+          <label for="icon_file" class="icon__file-input button--primary"> Open icon file </label>
+
+          <button type="button" class="button--primary toggle--url" name="url" aria-controls="urlModal">
+            Load from URL
+          </button>
+        </div>
 
         <section class="icon__grid">
           <div class="icon__mono">
@@ -204,6 +207,9 @@
         <aside class="about text">
           <div data-ea-publisher="monochromefyi" data-ea-type="text"></div>
           <p class="about__main">
+            Use Monochrome.fyi to preview your monochrome PWA icons before adding them to your web app manifest.
+          </p>
+          <p class="about__main">
             <a class="about__link" href="https://www.w3.org/TR/appmanifest/#purpose-member">Monochrome icons</a> allow
             web developers to specify a single color icon that will be filled in by the user-agent to match other icons
             on the device. On Android, this lets developers customize notifications and other areas where their icon
@@ -213,14 +219,48 @@
             Edit on
             <a class="about__link" href="https://github.com/NotWoods/monochrome"> GitHub </a>
           </p>
-          <p class="about__extra">
-            Created by
-            <a class="about__link" href="https://tigeroakes.com">
-              <img class="about__self-logo" src="tigeroakes.svg" alt="Tiger Oakes" height="20" width="135" />
+          <hr />
+          <div class="about__extra about__row">
+            <div class="about__col">
+              Created by
+              <a class="link" href="https://tigeroakes.com">
+                <img
+                  loading="lazy"
+                  class="about__self-logo"
+                  src="/tigeroakes.svg"
+                  alt="Tiger Oakes"
+                  height="32"
+                  width="160"
+                />
+              </a>
+            </div>
+            <a class="about__col" href="https://ko-fi.com/O4O645BF3" target="_blank">
+              <img loading="lazy" width="166" height="32" src="/kofi.svg" alt="Buy Me a Coffee at ko-fi.com" />
             </a>
-          </p>
+          </div>
         </aside>
       </main>
+
+      <dialog class="url-dialog" id="urlModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <label for="url"><h2 id="modalTitle">Icon URL</h2></label>
+        <form action="/">
+          <button
+            type="button"
+            class="button--small close-button toggle--url"
+            name="cancel"
+            aria-label="Close URL dialog"
+          >
+            &times;
+          </button>
+
+          <input autofocus type="url" id="url" name="demo" placeholder="https://example.com/image.png" />
+
+          <div class="button__row dialog-buttons">
+            <button type="submit" class="button--primary">Load</button>
+          </div>
+        </form>
+      </dialog>
+      <button type="button" class="scrim toggle--url" aria-hidden="true" aria-label="Close URL dialog"></button>
     </file-drop>
   </body>
 </html>

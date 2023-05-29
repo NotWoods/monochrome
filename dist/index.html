@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Monochrome.fyi</title>
+    <link href="css/viewer.css" rel="stylesheet" />
+    
+    
+    <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+    <link rel="preload" href="toggle/sun.svg" as="image" />
+    <link rel="preload" href="toggle/moon.svg" as="image" />
+    <link rel="modulepreload" href="data:application/javascript;base64,Ly8gQHRzLWNoZWNrCgovKioKICogUmV0dXJucyB0aGUgbXVsdGlwbGllciB0byBzY2FsZSB0aGUgYGxheWVyYCBieS4KICogRm9yIGV4YW1wbGUsIGlmIHBhZGRpbmcgaXMgMCUgdGhlbiB0aGUgcmV0dXJuIHZhbHVlIHdpbGwgYmUgMS4KICogQHBhcmFtIHtpbXBvcnQoJy4vdHlwZXMnKS5MYXllcn0gbGF5ZXIKICovCmZ1bmN0aW9uIGdldFNjYWxlKGxheWVyKSB7CiAgcmV0dXJuIDEgLSBsYXllci5wYWRkaW5nIC8gMTAwOwp9CgovKioKICogUmVuZGVyIGxheWVyIHRvIGdpdmVuIGNhbnZhcy4KICoKICogVGhlIGNhbnZhcyB3aWxsIGJlIGNsZWFyZWQgYW5kIHRoZSBsYXllciB3aWxsIGJlIGRyYXduIGRlcGVuZGluZyBvbiBpdHMKICogdmFyaW91cyBwcm9wZXJ0aWVzLgogKgogKiBAcGFyYW0ge2ltcG9ydCgnLi90eXBlcycpLkxheWVyfSBsYXllciBMYXllciB0byByZW5kZXIuCiAqIEBwYXJhbSB7aW1wb3J0KCcuL3R5cGVzJykuQ2FudmFzQ29udGFpbmVyfSBjYW52YXMgQ2FudmFzIGNvbnRhaW5lci4KICogQHBhcmFtIHsnbGlnaHQnIHwgJ2RhcmsnfSBjb2xvclNjaGVtZSBDdXJyZW50IGNvbG9yIHNjaGVtZS4KICovCmV4cG9ydCBmdW5jdGlvbiBkcmF3TGF5ZXIobGF5ZXIsIGNhbnZhcywgY29sb3JTY2hlbWUpIHsKICBjb25zdCB7IGN0eCwgc2l6ZSB9ID0gY2FudmFzOwogIGN0eC5jbGVhclJlY3QoMCwgMCwgc2l6ZSwgc2l6ZSk7CiAgbGV0IHdpZHRoID0gZ2V0U2NhbGUobGF5ZXIpICogc2l6ZTsKICBsZXQgaGVpZ2h0ID0gd2lkdGg7CgogIGN0eC5nbG9iYWxDb21wb3NpdGVPcGVyYXRpb24gPSAnc291cmNlLW92ZXInOwogIGlmIChsYXllci5zcmMpIHsKICAgIC8vIElmIGltYWdlIGxheWVyLi4uCiAgICBjb25zdCB7IGhlaWdodDogc3JjSGVpZ2h0LCB3aWR0aDogc3JjV2lkdGggfSA9IGxheWVyLnNyYzsKICAgIGNvbnN0IHNyY1JhdGlvID0gc3JjV2lkdGggLyBzcmNIZWlnaHQ7CgogICAgaWYgKGxheWVyLmZpdCA9PT0gJ2ZpbGwnKSB7CiAgICAgIC8vIGxlYXZlIHdpZHRoIGFuZCBoZWlnaHQgYXMgZGVmYXVsdAogICAgfSBlbHNlIGlmIChsYXllci5maXQgPT09ICdjb250YWluJyA/IHNyY1JhdGlvID4gMSA6IHNyY1JhdGlvIDwgMSkgewogICAgICBoZWlnaHQgPSB3aWR0aCAvIHNyY1JhdGlvOwogICAgfSBlbHNlIHsKICAgICAgd2lkdGggPSBoZWlnaHQgKiBzcmNSYXRpbzsKICAgIH0KICAgIGNvbnN0IGluc2V0WCA9IChzaXplIC0gd2lkdGgpIC8gMiArIGxheWVyLng7CiAgICBjb25zdCBpbnNldFkgPSAoc2l6ZSAtIGhlaWdodCkgLyAyICsgbGF5ZXIueTsKCiAgICBjdHguZ2xvYmFsQWxwaGEgPSAxOwogICAgY3R4LmRyYXdJbWFnZShsYXllci5zcmMsIGluc2V0WCwgaW5zZXRZLCB3aWR0aCwgaGVpZ2h0KTsKICAgIGN0eC5nbG9iYWxDb21wb3NpdGVPcGVyYXRpb24gPSAnc291cmNlLWF0b3AnOwogIH0KICBjb25zdCBpbnNldFggPSAoc2l6ZSAtIHdpZHRoKSAvIDIgKyBsYXllci54OwogIGNvbnN0IGluc2V0WSA9IChzaXplIC0gaGVpZ2h0KSAvIDIgKyBsYXllci55OwoKICBjdHguZmlsbFN0eWxlID0gY2FudmFzLmZpbGxbY29sb3JTY2hlbWVdOwogIGN0eC5nbG9iYWxBbHBoYSA9IGxheWVyLmFscGhhIC8gMTAwOwogIGN0eC5maWxsUmVjdChpbnNldFgsIGluc2V0WSwgd2lkdGgsIGhlaWdodCk7Cn0KCi8qKgogKiBDcmVhdGVzIGEgYmxvYiBVUkwgb3IgZGF0YSBVUkwgZm9yIHRoZSBjYW52YXMuCiAqIEBwYXJhbSB7SFRNTENhbnZhc0VsZW1lbnR9IGNhbnZhcwogKiBAcGFyYW0ge2Jvb2xlYW59IGJsb2IgSWYgdHJ1ZSwgdHJ5IHRvIHJldHVybiBCbG9iIFVSTC4KICovCmV4cG9ydCBhc3luYyBmdW5jdGlvbiB0b1VybChjYW52YXMsIGJsb2IpIHsKICBpZiAoYmxvYiAmJiBjYW52YXMudG9CbG9iKSB7CiAgICBjb25zdCBibG9iID0gYXdhaXQgbmV3IFByb21pc2UoKHJlc29sdmUpID0+CiAgICAgIGNhbnZhcy50b0Jsb2IocmVzb2x2ZSwgJ2ltYWdlL3BuZycpCiAgICApOwogICAgcmV0dXJuIFVSTC5jcmVhdGVPYmplY3RVUkwoYmxvYik7CiAgfSBlbHNlIHsKICAgIC8vIE5vIGJsb2IgQVBJLCBmYWxsYmFjayB0byBkYXRhIFVSTAogICAgcmV0dXJuIGNhbnZhcy50b0RhdGFVUkwoJ2ltYWdlL3BuZycpOwogIH0KfQoKLyoqCiAqIENyZWF0ZSBhIG5ldyBjYW52YXMgZWxlbWVudC4KICoKICogQHBhcmFtIHtudW1iZXJ9IHNpemUgV2lkdGggYW5kIGhlaWdodCBvZiB0aGUgc3F1YXJlIGNhbnZhcyBlbGVtZW50LgogKiBAcGFyYW0ge251bWJlcn0gc2NhbGUgU2NhbGUgZmFjdG9yIGZvciB0aGUgY2FudmFzLCBiYXNlZCBvbiBkaXNwbGF5IGRlbnNpdHkuCiAqIEByZXR1cm5zIHtpbXBvcnQoJy4vdHlwZXMnKS5DYW52YXNDb250YWluZXJ9CiAqLwpleHBvcnQgZnVuY3Rpb24gY3JlYXRlQ2FudmFzKHNpemUsIHNjYWxlID0gMSkgewogIGNvbnN0IGNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpOwogIHJldHVybiBzY2FsZUNhbnZhcyhjYW52YXMsIHNpemUsIHNjYWxlKTsKfQoKLyoqCiAqIFNjYWxlIGFuIGV4aXN0aW5nIGNhbnZhcyBlbGVtZW50LgogKgogKiBAcGFyYW0ge0hUTUxDYW52YXNFbGVtZW50fSBjYW52YXMgQ2FudmFzIGVsZW1lbnQgdG8gbW9kaWZ5LgogKiBAcGFyYW0ge251bWJlcn0gc2l6ZSBXaWR0aCBhbmQgaGVpZ2h0IG9mIHRoZSBzcXVhcmUgY2FudmFzIGVsZW1lbnQuCiAqIEBwYXJhbSB7bnVtYmVyfSBzY2FsZSBTY2FsZSBmYWN0b3IgZm9yIHRoZSBjYW52YXMsIGJhc2VkIG9uIGRpc3BsYXkgZGVuc2l0eS4KICogQHJldHVybnMge2ltcG9ydCgnLi90eXBlcycpLkNhbnZhc0NvbnRhaW5lcn0KICovCmV4cG9ydCBmdW5jdGlvbiBzY2FsZUNhbnZhcyhjYW52YXMsIHNpemUsIHNjYWxlID0gMSkgewogIGNhbnZhcy53aWR0aCA9IHNpemUgKiBzY2FsZTsKICBjYW52YXMuaGVpZ2h0ID0gc2l6ZSAqIHNjYWxlOwogIGNvbnN0IGN0eCA9IGNhbnZhcy5nZXRDb250ZXh0KCcyZCcpOwogIGN0eC5zY2FsZShzY2FsZSwgc2NhbGUpOwogIHJldHVybiB7CiAgICBjYW52YXMsCiAgICBjdHgsCiAgICBzaXplLAogICAgZmlsbDogewogICAgICBsaWdodDogY2FudmFzLmRhdGFzZXQubGlnaHQgfHwgJyMwMDAnLAogICAgICBkYXJrOiBjYW52YXMuZGF0YXNldC5kYXJrIHx8ICcjZmZmJywKICAgIH0sCiAgfTsKfQo=" />
+    <link rel="modulepreload" href="data:application/javascript;base64,Ly8gQHRzLWNoZWNrCgovKioKICogQ3JlYXRlIGEgbmV3IGltYWdlIGZyb20gYSBibG9iLgogKiBAcGFyYW0ge0ZpbGUgfCBzdHJpbmd9IHNvdXJjZSBVUkwgb3IgRmlsZSBmb3IgdGhlIGljb24uCiAqIElmIGEgRmlsZS9CbG9iLCBhbiBvYmplY3QgVVJMIGlzIGNyZWF0ZWQgYW5kIGRpc3BsYXllZC4KICogSWYgYSBzdHJpbmcsIHRoZSBzdHJpbmcgaXMgdXNlZCBhcyBhIFVSTCBkaXJlY3RseS4KICogQHJldHVybnMge1Byb21pc2U8SFRNTEltYWdlRWxlbWVudD59CiAqLwphc3luYyBmdW5jdGlvbiBjcmVhdGVJbWFnZShzb3VyY2UpIHsKICBjb25zdCBpbWcgPSBuZXcgSW1hZ2UoKTsKICBpZiAodHlwZW9mIHNvdXJjZSA9PT0gJ3N0cmluZycpIHsKICAgIGltZy5zcmMgPSBzb3VyY2U7CiAgfSBlbHNlIHsKICAgIGltZy5zcmMgPSBVUkwuY3JlYXRlT2JqZWN0VVJMKHNvdXJjZSk7CiAgfQogIGF3YWl0IGltZy5kZWNvZGUoKTsKICBpZiAodHlwZW9mIHNvdXJjZSAhPT0gJ3N0cmluZycpIHsKICAgIFVSTC5yZXZva2VPYmplY3RVUkwoaW1nLnNyYyk7CiAgfQogIHJldHVybiBpbWc7Cn0KCi8qKgogKiBDcmVhdGUgYSBsYXllciBmcm9tIGEgc291cmNlIGZpbGUuCiAqIEBwYXJhbSB7RmlsZSB8IHN0cmluZ30gc291cmNlCiAqIEByZXR1cm5zIHtQcm9taXNlPGltcG9ydCgiLi90eXBlcyIpLkxheWVyPn0KICovCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBsYXllckZyb21Tb3VyY2Uoc291cmNlKSB7CiAgY29uc3QgaW1nID0gYXdhaXQgY3JlYXRlSW1hZ2Uoc291cmNlKTsKICBjb25zdCBsYXllciA9IGNyZWF0ZUxheWVyKGltZyk7CiAgaWYgKHR5cGVvZiBzb3VyY2UgPT09ICdzdHJpbmcnKSB7CiAgICBsYXllci5uYW1lID0gc291cmNlOwogIH0gZWxzZSB7CiAgICBsYXllci5uYW1lID0gc291cmNlLm5hbWU7CiAgfQogIHJldHVybiBsYXllcjsKfQoKLyoqCiAqIENyZWF0ZSBhIG5ldyBpbWFnZSBvciBjb2xvciBjYW52YXMuCiAqIEBwYXJhbSB7aW1wb3J0KCIuL3R5cGVzIikuQ2FudmFzSW1hZ2VTb3VyY2VOdW19IFtzcmNdCiAqIEByZXR1cm5zIHtpbXBvcnQoIi4vdHlwZXMiKS5MYXllcn0KICovCmV4cG9ydCBmdW5jdGlvbiBjcmVhdGVMYXllcihzcmMpIHsKICByZXR1cm4gewogICAgc3JjLAogICAgbmFtZTogJ0xheWVyJywKICAgIHBhZGRpbmc6IDAsCiAgICB4OiAwLAogICAgeTogMCwKICAgIGFscGhhOiAxMDAsCiAgICBsb2NrZWQ6IGZhbHNlLAogICAgZml0OiAnY29udGFpbicsCiAgfTsKfQo=" />
+    <link rel="modulepreload" href="data:application/javascript;base64,Ly8gQHRzLWNoZWNrDQovLy8gPHJlZmVyZW5jZSB0eXBlcz0idHlwZXMtd20iIC8+DQoNCmlmICh3aW5kb3cuY3VzdG9tRWxlbWVudHMpIHsNCiAgaW1wb3J0KCdmaWxlLWRyb3AtZWxlbWVudCcpOw0KICBpbXBvcnQoJ2RhcmstbW9kZS10b2dnbGUnKTsNCn0NCg0KLyoqIEB0eXBlIHtpbXBvcnQoJ2RhcmstbW9kZS10b2dnbGUnKS5EYXJrTW9kZVRvZ2dsZX0gKi8NCmV4cG9ydCBjb25zdCB0b2dnbGUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdkYXJrLW1vZGUtdG9nZ2xlJyk7DQovKiogQHR5cGUge0hUTUxFbGVtZW50fSAqLw0KY29uc3QgYWQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdbZGF0YS1lYS1wdWJsaXNoZXJdJyk7DQovKiogQHR5cGUge0hUTUxJbWFnZUVsZW1lbnR9ICovDQpjb25zdCBub3RpZmljYXRpb25JbWFnZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoDQogICcucHJldmlldy0tYW5kcm9pZF9ub3RpZmljYXRpb24gLnByZXZpZXdfX2JhY2tncm91bmQnDQopOw0KDQovKioNCiAqIFNldCBvciByZW1vdmUgdGhlIGBkYXJrYCBjbGFzcyBvbiBib2R5IGFuZCBhZHMuDQogKiBAcGFyYW0ge2Jvb2xlYW59IGRhcmtNb2RlDQogKi8NCmZ1bmN0aW9uIHVwZGF0ZURhcmtNb2RlQ2xhc3NlcyhkYXJrTW9kZSkgew0KICBkb2N1bWVudC5ib2R5LmNsYXNzTGlzdC50b2dnbGUoJ2RhcmsnLCBkYXJrTW9kZSk7DQogIGFkLmNsYXNzTGlzdC50b2dnbGUoJ2RhcmsnLCBkYXJrTW9kZSk7DQp9DQoNCi8vIEluaXRpYWxpemUgdGhlIHRvZ2dsZSBiYXNlZCBvbiBgcHJlZmVycy1jb2xvci1zY2hlbWVgLCBkZWZhdWx0aW5nIHRvICdsaWdodCcuDQp0b2dnbGUubW9kZSA9IG1hdGNoTWVkaWEoJyhwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyayknKS5tYXRjaGVzDQogID8gJ2RhcmsnDQogIDogJ2xpZ2h0JzsNCi8vIFNldCBvciByZW1vdmUgdGhlIGBkYXJrYCBjbGFzcyB0aGUgZmlyc3QgdGltZS4NCnVwZGF0ZURhcmtNb2RlQ2xhc3Nlcyh0b2dnbGUubW9kZSA9PT0gJ2RhcmsnKTsNCg0KLy8gTGlzdGVuIGZvciB0b2dnbGUgY2hhbmdlcyAod2hpY2ggaW5jbHVkZXMgYHByZWZlcnMtY29sb3Itc2NoZW1lYCBjaGFuZ2VzKQ0KLy8gYW5kIHRvZ2dsZSB0aGUgYGRhcmtgIGNsYXNzIGFjY29yZGluZ2x5Lg0KdG9nZ2xlLmFkZEV2ZW50TGlzdGVuZXIoJ2NvbG9yc2NoZW1lY2hhbmdlJywgKCkgPT4gew0KICB1cGRhdGVEYXJrTW9kZUNsYXNzZXModG9nZ2xlLm1vZGUgPT09ICdkYXJrJyk7DQogIG5vdGlmaWNhdGlvbkltYWdlLnNyYyA9IGBwcmV2aWV3cy9hbmRyb2lkX25vdGlmaWNhdGlvbl8ke3RvZ2dsZS5tb2RlfS5zdmdgOw0KfSk7DQoNCmlmIChkb2N1bWVudC5tb25ldGl6YXRpb24pIHsNCiAgZnVuY3Rpb24gb25Nb25ldGl6YXRpb25TdGFydCgpIHsNCiAgICBpZiAoZG9jdW1lbnQubW9uZXRpemF0aW9uLnN0YXRlID09PSAnc3RhcnRlZCcpIHsNCiAgICAgIGNvbnNvbGUubG9nKCdQYXltZW50IHN0YXJ0ZWQsIGhpZGluZyBhZHMnKTsNCiAgICAgIGFkLmhpZGRlbiA9IHRydWU7DQogICAgfQ0KICB9DQogIGRvY3VtZW50Lm1vbmV0aXphdGlvbi5hZGRFdmVudExpc3RlbmVyKA0KICAgICdtb25ldGl6YXRpb25zdGFydCcsDQogICAgb25Nb25ldGl6YXRpb25TdGFydA0KICApOw0KfQ0K" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon_16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon_32.png" />
+    <link rel="icon" type="image/png" sizes="196x196" href="favicon/favicon_196.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon/favicon_512.png" />
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk1vbm9jaHJvbWUuZnlpIiwKICAic2hvcnRfbmFtZSI6ICJNb25vY2hyb21lIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmYWZhZmEiLAogICJ0aGVtZV9jb2xvciI6ICIjMGEyMTRkIiwKICAiZGVzY3JpcHRpb24iOiAiUHJldmlldyBtb25vY2hyb21lIGljb25zIGluIHRoZSBicm93c2VyLiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImZhdmljb24vZmF2aWNvbl81MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbW9ub2Nocm9tZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZmF2aWNvbi9mYXZpY29uLnN2ZyIsCiAgICAgICJzaXplcyI6ICJhbnkiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1vbm9jaHJvbWUiCiAgICB9LAogICAgewogICAgICAic3JjIjogImZhdmljb24vbWFza2FibGVfNTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAibWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogImZhdmljb24vbWFza2FibGUuc3ZnIiwKICAgICAgInNpemVzIjogImFueSIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJtYXNrYWJsZSIKICAgIH0KICBdCn0K" />
+    <link rel="apple-touch-icon" sizes="196x196" href="favicon/maskable_196.png" />
+    <meta name="theme-color" content="#0a214d" />
+    <meta name="description" content="Preview monochrome icons in the browser!" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Not_Woods" />
+    <meta name="twitter:title" content="Monochrome.fyi" />
+    <meta name="twitter:description" content="Preview monochrome icons in the browser!" />
+    <meta name="twitter:image" content="https://monochrome.fyi/github_social.png" />
+    <meta name="og:title" content="Monochrome.fyi" />
+    <meta name="og:type" content="" />
+    <meta name="og:image" content="https://monochrome.fyi/github_social.png" />
+    <meta name="og:url" content="https://monochrome.fyi" />
+    <meta name="og:description" content="Preview monochrome icons in the browser!" />
+    <meta name="monetization" content="$ilp.uphold.com/p2WKq3nJHA8w" />
+    <script src="https://cdn.usefathom.com/script.js" data-site="NJIHCIQU" data-spa="hash" defer></script>
+    <script type="module" crossorigin src="/assets/index-700d82c5.js"></script>
+  <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script>  <script type="module">import.meta.url;import("_").catch(()=>1);async function* g(){};if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
+  <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+<style>
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/S6uyw4BMUTPHjxAwXjeu-1c2fc265.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/S6uyw4BMUTPHjx4wXg-918b7dc3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/assets/S6u9w4BMUTPHh50XSwaPGR_p-f89e4b21.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/assets/S6u9w4BMUTPHh50XSwiPGQ-08664859.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+</head>
+
+  <body>
+    <file-drop accept="image/*" id="icon_drop" class="icon__file-drop drop">
+      <main class="viewer">
+        <header class="navbar">
+          <a href="?demo=favicon/favicon_512.png">
+            <img class="navbar__logo" src="favicon/favicon.svg" alt="" height="40" width="40" />
+          </a>
+          <h1 class="title">Monochrome.fyi</h1>
+
+          <nav class="navbar__links">
+            <a href="/" class="navbar__link navbar__link--active">Viewer</a>
+            <a href="https://maskable.app" class="navbar__link">
+              Maskable.app
+              <svg
+                class="outbound"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width="15"
+                height="15"
+                fill="currentColor"
+              >
+                <title>Outbound</title>
+                <path
+                  d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"
+                ></path>
+                <polygon
+                  points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"
+                ></polygon>
+              </svg>
+            </a>
+          </nav>
+
+          <dark-mode-toggle permanent></dark-mode-toggle>
+        </header>
+
+        <ul class="demo__list">
+          <!--
+            Different sample icons that the user can look at.
+            The original source of the icon is linked in the data-source attribute.
+            The alt tag is used as the title of the source.
+          -->
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/spec.svg">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/spec.svg"
+                data-png="demo/spec.png"
+                alt="W3C example"
+                data-source="https://www.w3.org/TR/appmanifest/#examples-of-masks"
+              />
+            </a>
+          </li>
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/color-breakdown.png">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/color-breakdown.png"
+                alt="Color Breakdown"
+                data-source="https://notwoods.github.io/color-breakdown/"
+              />
+            </a>
+          </li>
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/insightful-energy.svg">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/insightful-energy.svg"
+                data-png="demo/insightful-energy.png"
+                alt="Insightful Energy"
+                data-source="https://notwoods.github.io/insightful-energy/"
+              />
+            </a>
+          </li>
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/big-island-buses.svg">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/big-island-buses.svg"
+                data-png="demo/big-island-buses.png"
+                alt="Big Island Buses"
+                data-source="https://notwoods.github.io/big-island-buses/"
+              />
+            </a>
+          </li>
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/proxx.svg">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/proxx.svg"
+                data-png="demo/proxx.png"
+                alt="PROXX"
+                data-source="https://proxx.app"
+              />
+            </a>
+          </li>
+          <li class="demo">
+            <a class="demo__link" href="?demo=demo/svgomg.svg">
+              <img
+                width="56"
+                height="56"
+                class="demo__preview"
+                src="demo/svgomg.svg"
+                data-png="demo/svgomg.png"
+                alt="SVGOMG"
+                data-source="https://jakearchibald.github.io/svgomg/"
+              />
+            </a>
+          </li>
+        </ul>
+
+        <input type="file" accept="image/*" class="hidden-input" id="icon_file" name="icon_file" />
+        <label for="icon_file" class="icon__file-input button--primary"> Open icon file </label>
+
+        <section class="icon__grid">
+          <div class="icon__mono">
+            <canvas class="icon" width="192" height="192" data-light="#4b4b4b" data-dark="#e4e4e4"></canvas>
+          </div>
+          <div class="icon__original">
+            <img width="192" height="192" class="icon" alt="Preview of original icon" src="demo/spec.svg" />
+          </div>
+        </section>
+
+        <section class="controls text">
+          <h3>Controls</h3>
+          <label class="mask__option">
+            <input type="checkbox" name="shrink" autocomplete="off" accesskey="*" />
+            Shrink
+          </label>
+          <label class="mask__option">
+            <input type="checkbox" name="original" autocomplete="off" accesskey="#" />
+            Show original image
+          </label>
+        </section>
+        <aside class="source text">
+          <p>
+            Icon from
+            <a href="https://www.w3.org/TR/appmanifest/#examples-of-masks" class="source__link"> W3C example </a>
+          </p>
+        </aside>
+
+        <details class="previews" open>
+          <summary><h3>Previews</h3></summary>
+
+          <div class="preview preview--android_notification">
+            <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123" />
+            <canvas class="icon" width="21.6" height="21.6" data-light="#607D8B" data-dark="#607D8B"></canvas>
+          </div>
+        </details>
+
+        <hr />
+        <aside class="about text">
+          <div data-ea-publisher="monochromefyi" data-ea-type="text"></div>
+          <p class="about__main">
+            <a class="about__link" href="https://www.w3.org/TR/appmanifest/#purpose-member">Monochrome icons</a> allow
+            web developers to specify a single color icon that will be filled in by the user-agent to match other icons
+            on the device. On Android, this lets developers customize notifications and other areas where their icon
+            appears with no color.
+          </p>
+          <p class="about__extra">
+            Edit on
+            <a class="about__link" href="https://github.com/NotWoods/monochrome"> GitHub </a>
+          </p>
+          <p class="about__extra">
+            Created by
+            <a class="about__link" href="https://tigeroakes.com">
+              <img class="about__self-logo" src="tigeroakes.svg" alt="Tiger Oakes" height="20" width="135" />
+            </a>
+          </p>
+        </aside>
+      </main>
+    </file-drop>
+    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+    <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-71827e05.js"></script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-b490d936.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+  </body>
+</html>
