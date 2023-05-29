@@ -1,16 +1,16 @@
 {
-  "exclude": [
-    "node_modules/**",
-    "web_modules/**",
-    "src/*-bundle.js",
-    "workbox-*.js",
-    "sw.js"
+  "exclude": ["node_modules/**", "src/*-bundle.js", "workbox-*.js", "sw.js"],
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "src/missing-types.d.ts",
+    "*.mjs",
+    "*.cjs"
   ],
-  "include": ["src/**/*", "lib/**/*", "*.mjs", "*.cjs"],
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "target": "ES6",
+    "target": "es2015",
     "module": "es2020",
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -19,13 +19,7 @@
     "noImplicitAny": false,
     "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "/web_modules/*.js": [
-        "node_modules/@types/*",
-        "node_modules/*",
-        "web_modules/*.js"
-      ]
-    },
-    "types": []
+    "types": ["node", "vite/client", "vite-plugin-pwa/client"],
+    "lib": ["dom", "dom.iterable", "es2015", "es2018.promise"]
   }
 }

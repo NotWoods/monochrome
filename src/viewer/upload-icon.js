@@ -1,53 +1,24 @@
-// @ts-check
+import './libs.js';
 
-import { drawLayer, scaleCanvas } from './canvas.js';
-import { layerFromSource } from './layer.js';
-import { toggle } from './libs.js';
-
-// @ts-ignore
-const IS_FIREFOX = typeof InstallTrigger !== 'undefined';
-const DPR = window.devicePixelRatio || 1;
-
-const ICON_CANVASES = Array.from(document.querySelectorAll('canvas')).map(
-  (canvas) => scaleCanvas(canvas, canvas.width, DPR)
-);
-
-// @ts-ignore
-window.ICON_CANVASES = ICON_CANVASES;
-
-/** @type {import('./types').Layer | undefined} */
-let currentLayer;
-
-/**
- * Sanitize a demo source on Firefox,
- * which has bugs loading relative path SVGs into the canvas.
- *
- * @param {string} source Source URL of the image.
- */
-function sanitizeDemoSource(source) {
-  if (IS_FIREFOX && source.startsWith('demo/')) {
-    return source.replace('.svg', '.png');
-  } else {
-    return source;
-  }
-}
+const imgElements =
+  /** @type {HTMLCollectionOf<HTMLImageElement | SVGImageElement>} */ (
+    document.getElementsByClassName('icon')
+  );
+const lastImg = /** @type {HTMLImageElement} */ (imgElements[0]);
 
 /**
  * Changes the displayed icon in the center of the screen.
  *
- * @param {File | string | undefined} source URL or File for the icon.
+ * @param {Blob | string | undefined} source URL or File for the icon.
  * If a File/Blob, an object URL is created and displayed.
  * If a string, the string is used as a URL directly.
  * If undefined (or falsy), nothing happens.
  */
-async function updateDisplayedIcon(source) {
+function updateDisplayedIcon(source) {
   if (!source) return;
 
-  const layerAsync = layerFromSource(source);
-  /** @type {HTMLImageElement} */
-  const originalImg = document.querySelector('.icon__original .icon');
-
-  const oldUrl = originalImg.src;
+  // Revoke the old URL
+  const oldUrl = lastImg.src;
   if (oldUrl.startsWith('blob:')) {
     URL.revokeObjectURL(oldUrl);
   }
@@ -60,22 +31,17 @@ async function updateDisplayedIcon(source) {
     source = URL.createObjectURL(source);
     history.replaceState(undefined, '', '.');
   }
+
   updateSource(source);
-
-  currentLayer = await layerAsync;
-  ICON_CANVASES.forEach((canvas) => {
-    drawLayer(currentLayer, canvas, toggle.mode);
-  });
-  originalImg.src = source;
-}
-
-toggle.addEventListener('colorschemechange', () => {
-  if (currentLayer) {
-    ICON_CANVASES.forEach((canvas) => {
-      drawLayer(currentLayer, canvas, toggle.mode);
-    });
+  for (let i = 0; i < imgElements.length; i++) {
+    const imgElement = imgElements[i];
+    if (imgElement instanceof SVGImageElement) {
+      imgElement.setAttribute('href', source);
+    } else {
+      imgElement.src = source;
+    }
   }
-});
+}
 
 /**
  * Changes the "Icon from" credits at the bottom of the app.
@@ -83,22 +49,20 @@ toggle.addEventListener('colorschemechange', () => {
  * The `alt` attribute is used for the human-readable portion of the link.
  * The `data-source` attribute is used for the URL of the link.
  *
- * @param {string | undefined} source Source URL of the displayed icon.
+ * @param {string} source Source URL of the displayed icon.
  * If the URL does not correspond to one of the demo icons, then the credits text is hidden.
  */
 function updateSource(source) {
   /** @type {HTMLElement} */
   const sourceDisplay = document.querySelector('.source');
+  if (!sourceDisplay) return;
+
   /** @type {HTMLAnchorElement} */
   const sourceLink = sourceDisplay.querySelector('.source__link');
 
-  /** @type {HTMLImageElement | null} */
-  const preview =
-    source &&
-    document.querySelector(
-      `.demo__preview[src$="${source}"],.demo__preview[data-png="${source}"]`
-    );
-  if (preview) {
+  /** @type {HTMLImageElement} */
+  const preview = document.querySelector(`.demo__preview[src$="${source}"]`);
+  if (preview != undefined) {
     sourceDisplay.hidden = false;
     sourceLink.href = preview.dataset.source;
     sourceLink.textContent = preview.alt;
@@ -112,39 +76,55 @@ const fileInput = document.querySelector('#icon_file');
 /** @type {import('file-drop-element').FileDropElement} The invisible file drop area */
 const fileDrop = document.querySelector('#icon_drop');
 
-// Update the displayed icon when the "Open icon file" button is used
-fileInput.addEventListener('change', () =>
-  updateDisplayedIcon(fileInput.files[0])
-);
-// Update the displayed icon when a file is dropped in
-fileDrop.addEventListener('filedrop', (evt) =>
-  updateDisplayedIcon(evt.files[0])
-);
+if (fileInput) {
+  /** @type {AddEventListenerOptions} */
+  const pas = { passive: true };
 
-// File input focus polyfill for Firefox
-fileInput.addEventListener('focus', () => fileInput.classList.add('focus'), {
-  passive: true,
-});
-fileInput.addEventListener('blur', () => fileInput.classList.remove('focus'), {
-  passive: true,
-});
+  // Update the displayed icon when the "Open icon file" button is used
+  fileInput.addEventListener(
+    'change',
+    () => updateDisplayedIcon(fileInput.files[0]),
+    pas
+  );
+  // Update the displayed icon when a file is dropped in
+  fileDrop.addEventListener(
+    'filedrop',
+    (evt) => updateDisplayedIcon(evt.files[0]),
+    pas
+  );
+
+  // File input focus polyfill for Firefox
+  fileInput.addEventListener(
+    'focus',
+    () => fileInput.classList.add('focus'),
+    pas
+  );
+  fileInput.addEventListener(
+    'blur',
+    () => fileInput.classList.remove('focus'),
+    pas
+  );
+}
 
 // If there's a URL present in the "?demo" query parameter, use it as the icon URL.
 const demoUrl = new URL(location.href).searchParams.get('demo');
-updateDisplayedIcon(sanitizeDemoSource(demoUrl || 'demo/spec.svg'));
+updateDisplayedIcon(demoUrl);
 
 /** @type {HTMLUListElement} */
 const demoLinks = document.querySelector('.demo__list');
-demoLinks.addEventListener('click', (evt) => {
-  const target = /** @type {HTMLElement} */ (evt.target);
-  /** @type {HTMLAnchorElement} */
-  const link = target.closest('.demo__link');
-  if (link != null) {
-    evt.preventDefault();
-    const demoUrl = new URL(link.href).searchParams.get('demo');
-    updateDisplayedIcon(sanitizeDemoSource(demoUrl));
-  }
-});
+if (demoLinks) {
+  demoLinks.addEventListener('click', (evt) => {
+    const target = /** @type {HTMLElement} */ (evt.target);
+    const link = /** @type {HTMLAnchorElement | null} */ (
+      target.closest('.demo__link')
+    );
+    if (link != undefined) {
+      evt.preventDefault();
+      const demoUrl = new URL(link.href).searchParams.get('demo');
+      updateDisplayedIcon(demoUrl);
+    }
+  });
+}
 
 /** @type {HTMLElement} */
 const container = document.querySelector('.icon__grid');
