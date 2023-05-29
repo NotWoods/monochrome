@@ -5,14 +5,13 @@
     <title>Monochrome.fyi</title>
     <link href="css/viewer.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
+    <script type="module" src="src/viewer/libs.js"></script>
     <script type="module" src="src/viewer/upload-icon.js"></script>
     <script type="module" src="src/viewer/keys.js"></script>
+    <script type="module" src="src/viewer/load-url.js"></script>
     <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
     <link rel="preload" href="toggle/sun.svg" as="image" />
     <link rel="preload" href="toggle/moon.svg" as="image" />
-    <link rel="modulepreload" href="src/viewer/canvas.js" />
-    <link rel="modulepreload" href="src/viewer/layer.js" />
-    <link rel="modulepreload" href="src/viewer/libs.js" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon_16.png" />
@@ -171,8 +170,8 @@
           <div class="icon__original">
             <img width="192" height="192" class="icon" alt="Preview of original icon" src="demo/spec.svg" />
           </div>
-          <div class="icon__mono">
-            <img width="192" height="192" class="icon" alt="Preview of monochrome icon" src="demo/spec.svg" />
+          <div class="icon__mono monochrome__container">
+            <img width="192" height="192" class="icon monochrome" alt="Preview of monochrome icon" src="demo/spec.svg" />
           </div>
         </section>
 
@@ -194,12 +193,14 @@
           </p>
         </aside>
 
-        <details hidden class="previews" open>
+        <details class="previews" open>
           <summary><h3>Previews</h3></summary>
 
           <div class="preview preview--android_notification">
             <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123" />
-            <canvas class="icon" width="21.6" height="21.6" data-light="#607D8B" data-dark="#607D8B"></canvas>
+            <div class="monochrome__container">
+              <img class="icon monochrome" width="21.6" height="21.6" style="--canvas-light: #607D8B; --canvas-dark: #607D8B"></canvas>
+            </div>
           </div>
         </details>
 

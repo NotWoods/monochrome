@@ -1,5 +1,4 @@
 body {
-  --mono-lightness: 0.294;
   --background: #fafafa;
   --text-color: black;
   --subtle-text-color: rgba(0, 0, 0, 0.7);
@@ -17,7 +16,6 @@ body {
   accent-color: #0a214d;
 }
 .dark {
-  --mono-lightness: 0.894;
   --text-color: white;
   --subtle-text-color: rgba(255, 255, 255, 0.7);
   --background: #333;
@@ -367,8 +365,16 @@ hr {
   margin: auto;
 }
 
-.icon__mono .icon {
-  filter: brightness(0) invert(var(--mono-lightness));
+.monochrome__container {
+  overflow: hidden;
+}
+.monochrome {
+  transform: translateX(-192px);
+  filter: drop-shadow(192px 0 0);
+  color: var(--foreground-color, var(--canvas-light, #4b4b4b));
+}
+.dark .monochrome {
+  color: var(--foreground-color, var(--canvas-dark, #e4e4e4));
 }
 
 .preview {

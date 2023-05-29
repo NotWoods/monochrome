@@ -1,5 +1,3 @@
-import './libs.js';
-
 const imgElements =
   /** @type {HTMLCollectionOf<HTMLImageElement | SVGImageElement>} */ (
     document.getElementsByClassName('icon')
