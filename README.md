@@ -1,4 +1,4 @@
-<img src="favicon/favicon_196.png" width="128" height="128" alt="">
+<img src="pulibc/favicon/favicon_196.png" width="128" height="128" alt="">
 
 # Monochrome.fyi
 
@@ -26,11 +26,8 @@ Install dependencies:
 npm install
 ```
 
-Once the modules are installed, just run a web server. Thanks to
-[Snowpack](https://www.snowpack.dev/), no build step is needed to test the
-program.
-
-To generate the Service Worker, run `npm run sw`.
+Once the modules are installed, just run a web server. Thanks to Vite, no build
+step is needed to test the program.
 
 ## Licensing
 
