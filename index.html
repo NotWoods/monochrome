@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
     <script type="module" src="src/viewer/libs.js"></script>
     <script type="module" src="src/viewer/upload-icon.js"></script>
+    <script type="module" src="src/viewer/color.js"></script>
     <script type="module" src="src/viewer/keys.js"></script>
     <script type="module" src="src/viewer/load-url.js"></script>
     <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
@@ -183,6 +184,40 @@
 
         <section class="controls text">
           <h3>Controls</h3>
+          <form action="#" id="foregroundColor" class="control accent--foreground">
+            <span class="control__label">
+              <label for="color">Icon Color</label>
+              <button
+                type="button"
+                name="eyedropper"
+                class="control__helper button--small"
+                aria-label="Eyedropper"
+                title="Eyedropper"
+                hidden
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M21.42 6.34l-3.75-3.75-3.82 3.82-1.94-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.92-1.92 3.84-3.83zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="reset"
+                name="reset-color"
+                class="control__helper button--small"
+                aria-label="Reset"
+                title="Reset"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
+                  <path
+                    d="m744-324-57-57 7-28q3-14 2-29 0-40-13-77t-42-67L480-762l-82 92-51-51 133-149 214 240q38 38 56 88t18 104q0 29-6 58t-18 56Zm24 228L655-210q-38 29-82 45t-93 15q-120 0-204-84t-84-204q0-48 16-92t44-82L90-775l51-51 678 679-51 51ZM480-222q33 0 65-10t58-30L303-561q-18 28-28 59-11 31-11 64 0 90 63 153t153 63Zm-27-189Zm97-108Z"
+                  />
+                </svg>
+              </button>
+            </span>
+            <input class="control__input" id="color" type="color" name="fill" value="#4b4b4b" />
+            <input type="text" name="fill" class="control__preview" aria-label="Color Code" value="#4b4b4b" />
+          </form>
           <label class="mask__option">
             <input type="checkbox" name="shrink" autocomplete="off" accesskey="*" />
             Shrink
@@ -203,13 +238,19 @@
           <summary><h3>Previews</h3></summary>
 
           <div class="preview preview--android_notification">
-            <img class="preview__background" src="previews/android_notification_light.svg" width="400" height="123" />
-            <div class="monochrome__container">
+            <img
+              class="preview__background"
+              src="previews/android_notification_light.svg"
+              alt="Android Notification"
+              width="400"
+              height="123"
+            />
+            <div class="preview__icon monochrome__container">
               <img
-                class="icon monochrome"
+                class="icon icon__mono monochrome"
                 width="21.6"
                 height="21.6"
-                style="--canvas-light: #607d8b; --canvas-dark: #607d8b"
+                style="--canvas-light: #3a8af9; --canvas-dark: #3a8af9"
               />
             </div>
           </div>
@@ -261,6 +302,7 @@
             class="button--small close-button toggle--url"
             name="cancel"
             aria-label="Close URL dialog"
+            aria-controls="urlModal"
           >
             &times;
           </button>
@@ -272,7 +314,6 @@
           </div>
         </form>
       </dialog>
-      <button type="button" class="scrim toggle--url" aria-hidden="true" aria-label="Close URL dialog"></button>
     </file-drop>
   </body>
 </html>
