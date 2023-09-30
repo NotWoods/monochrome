@@ -12,26 +12,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "dark-mode-toggle": "^0.8.0",
+    "dark-mode-toggle": "^0.14.6",
     "file-drop-element": "^1.0.1"
   },
   "devDependencies": {
     "@typescript/lib-dom": "npm:@types/web@^0.0.99",
     "@vitejs/plugin-legacy": "^4.0.2",
     "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.7.0",
+    "eslint-config-prettier": "^9.0.0",
     "jsdom": "^22.1.0",
-    "prettier": "~2.8.8",
+    "prettier": "~3.0.3",
     "types-wm": "^1.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.0",
-    "vite-plugin-pwa": "^0.15.1",
+    "vite-plugin-pwa": "^0.16.5",
     "vite-plugin-webfont-dl": "^3.6.1",
-    "vitest": "^0.31.1"
+    "vitest": "^0.34.6"
   },
   "prettier": {
     "singleQuote": true,
     "proseWrap": "always",
+    "trailingComma": "es5",
     "overrides": [
       {
         "files": "*.html",
