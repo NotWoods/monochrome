@@ -5,6 +5,12 @@ body {
   --divider-color: rgba(0, 0, 0, 0.25);
   --tabs-height: 3rem;
 
+  --accent: hsl(219.4, 77%, 17.1%);
+  --accent-hover: hsl(219.6, 77.8%, 14.1%);
+  --accent-active: hsl(219.6, 76.8%, 27.1%);
+  --hint-hover: hsla(219.6, 77.8%, 14.1%, 0.2);
+  --hint-active: hsla(219.6, 77.8%, 14.1%, 0.3);
+
   margin: 0;
   min-height: calc(100vh - 1rem); /* Not sure why this works (: */
 
@@ -23,7 +29,7 @@ body {
   color: var(--text-color);
   background: var(--background);
   text-align: center;
-  accent-color: #0a214d;
+  accent-color: var(--accent);
 }
 .dark {
   --text-color: white;
@@ -129,10 +135,10 @@ dialog[open] {
   white-space: nowrap;
 }
 .navbar__link:hover {
-  background: rgba(8, 27, 64, 0.2);
+  background: var(--hint-hover);
 }
-.navbar__link:focus {
-  background: rgba(8, 27, 64, 0.3);
+.navbar__link:active, .navbar__link:focus {
+  background: var(--hint-active);
 }
 .navbar__link--active {
   color: inherit;
@@ -174,7 +180,7 @@ input[type='url'] {
   border: 1px solid transparent;
   border-radius: 4px;
   color: white;
-  background: #0a214d;
+  background: var(--accent);
   font-weight: 700;
   font-size: 0.875em;
 }
@@ -183,14 +189,14 @@ input[type='url'] {
 input:focus + label.button--primary,
 input.focus + label.button--primary input:focus + label.button--secondary,
 input.focus + label.button--secondary {
-  background: #081b40;
+  background: var(--accent-hover);
   box-shadow:
     0 1px 2px #3c40434d,
     0 1px 3px 1px #3c404326;
 }
 .button--primary:active,
 .button--secondary:active {
-  background: #10347a;
+  background: var(--accent-active);
   box-shadow:
     0 1px 2px #3c40434d,
     0 2px 6px 2px #3c404326;
@@ -347,10 +353,6 @@ dialog::backdrop {
 .source,
 .about p {
   opacity: 0.7;
-}
-.source__link,
-.about__link {
-  color: inherit;
 }
 
 .text {
