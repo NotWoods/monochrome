@@ -12,7 +12,7 @@ export const toggle = document.querySelector('dark-mode-toggle');
 const ad = document.querySelector('[data-ea-publisher]');
 /** @type {HTMLImageElement} */
 const notificationImage = document.querySelector(
-  '.preview--android_notification .preview__background'
+  '.preview--android_notification .preview__background',
 );
 
 /**
@@ -47,6 +47,6 @@ if (document.monetization) {
   }
   document.monetization.addEventListener(
     'monetizationstart',
-    onMonetizationStart
+    onMonetizationStart,
   );
 }

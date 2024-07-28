@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "prettier . --ignore-path .gitignore --check && eslint . --ignore-path .gitignore",
-    "format": "prettier . --ignore-path .gitignore --write && eslint . --ignore-path .gitignore --fix",
+    "lint": "prettier . --ignore-path .gitignore --check",
+    "postlint": "eslint .",
+    "format": "prettier . --ignore-path .gitignore --write",
+    "postformat": "eslint . --fix",
     "test": "npm run check && vitest",
     "check": "tsc --noEmit",
     "dev": "vite",
@@ -16,28 +18,31 @@
     "file-drop-element": "^1.0.1"
   },
   "devDependencies": {
-    "@typescript/lib-dom": "npm:@types/web@^0.0.99",
-    "@vitejs/plugin-legacy": "^4.0.2",
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^9.0.0",
-    "jsdom": "^22.1.0",
-    "prettier": "~3.0.3",
+    "@eslint/js": "^9.8.0",
+    "@typescript/lib-dom": "npm:@types/web@^0.0.151",
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "eslint": "^9.8.0",
+    "eslint-config-flat-gitignore": "^0.1.8",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.8.0",
+    "jsdom": "^24.1.1",
+    "prettier": "~3.3.3",
     "types-wm": "^1.1.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.2.0",
-    "vite-plugin-pwa": "^0.16.5",
-    "vite-plugin-webfont-dl": "^3.6.1",
-    "vitest": "^0.34.6"
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
+    "vite-plugin-pwa": "^0.20.1",
+    "vite-plugin-webfont-dl": "^3.9.4",
+    "vitest": "^2.0.4"
   },
   "prettier": {
     "singleQuote": true,
     "proseWrap": "always",
-    "trailingComma": "es5",
     "overrides": [
       {
         "files": "*.html",
         "options": {
-          "printWidth": 120
+          "printWidth": 120,
+          "singleQuote": false
         }
       }
     ]

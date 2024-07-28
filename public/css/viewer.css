@@ -137,7 +137,8 @@ dialog[open] {
 .navbar__link:hover {
   background: var(--hint-hover);
 }
-.navbar__link:active, .navbar__link:focus {
+.navbar__link:active,
+.navbar__link:focus {
   background: var(--hint-active);
 }
 .navbar__link--active {

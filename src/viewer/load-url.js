@@ -11,7 +11,7 @@ function setupContent() {
 }
 
 for (const element of document.querySelectorAll(
-  'button[aria-controls="urlModal"]'
+  'button[aria-controls="urlModal"]',
 )) {
   element.addEventListener('click', () => {
     if (urlDialog.open) {
