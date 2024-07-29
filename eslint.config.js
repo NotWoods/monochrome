@@ -28,12 +28,6 @@ const config = [
       'no-var': 'error',
     },
   },
-  {
-    files: ['lib/*.mjs'],
-    languageOptions: {
-      globals: globals.node,
-    },
-  },
 ];
 
 export default config;

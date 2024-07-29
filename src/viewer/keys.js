@@ -10,6 +10,11 @@ focusable.forEach((input) => {
 
 document.addEventListener('keydown', (evt) => {
   if (evt.repeat) return; // Ignore holding down keys
+  if (evt.target instanceof HTMLInputElement && evt.target.type === 'text') {
+    // Ignore typing in text fields
+    return;
+  }
+
   const input = accessKeys.get(evt.key);
 
   if (input) {
